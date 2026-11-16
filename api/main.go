@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"net/http"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
@@ -17,6 +18,18 @@ func main() {
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("Hello world!"))
 	})
+
+	r.Mount("/echoes", EchoRoutes())
 	
-	http.ListenAndServe(":3000", r)
+	log.Fatal(http.ListenAndServe(":3000", r))
+}
+
+
+func EchoRoutes() chi.Router {
+	eRouter := chi.NewRouter()
+
+	echoHandler := EchoHandler{}
+	eRouter.Get("/", echoHandler.ListEchoes)
+
+	return eRouter
 }
