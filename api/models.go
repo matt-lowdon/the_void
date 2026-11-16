@@ -15,10 +15,11 @@ type Echo struct{
 	Public bool `json:"public"`
 }
 
-var echoes = []*Echo{
+var Echoes = []*Echo{
 	{Id: "1", Title: "Hello", Body: "This is the text", Public: true},
 	{Id: "2", Title: "Another echo", Body: "I am another echo", Public: true},
 }
+
 
 // The request payload for the Echo data model
 type EchoRequest struct{
