@@ -12,21 +12,23 @@ type Echo struct{
 	Id string `json:"id"`
 	Title string `json:"title"`
 	Body string `json:"body"`
-	Public bool `json:"public"`
 }
 
 var Echoes = []*Echo{
-	{Id: "1", Title: "Hello", Body: "This is the text", Public: true},
-	{Id: "2", Title: "Another echo", Body: "I am another echo", Public: true},
+	{Id: "1", Title: "Hello", Body: "This is the text"},
+	{Id: "2", Title: "Another echo", Body: "I am another echo"},
 }
 
 
 // The request payload for the Echo data model
 type EchoRequest struct{
 	*Echo
+
+	Public bool `json:"public"`
 }
 
 // Bind method for render.Binder interface
+// Safe to ignore checks on Public. If it's missing it safely defaults to false
 func (e *EchoRequest) Bind(r *http.Request) error {
 	if e.Echo == nil {
 		return errors.New("missing required Echo field")
@@ -35,7 +37,6 @@ func (e *EchoRequest) Bind(r *http.Request) error {
 	return nil
 }
 
-
 // The response payload for the Echo data model
 type EchoResponse struct{
 	*Echo
@@ -43,6 +44,21 @@ type EchoResponse struct{
 
 // Render method for render.Renderer interface
 func (e *EchoResponse) Render(w http.ResponseWriter, r *http.Request) error {
+	return nil
+}
+
+type SubmissionResponse struct{
+	Received bool `json:"received"`
+	Saved bool `json:"saved"`
+	ID string `json:"id,omitempty"`
+}
+
+func (s *SubmissionResponse) Render(w http.ResponseWriter, r *http.Request) error {
+	if s.Saved {
+		render.Status(r, http.StatusCreated)
+	} else {
+		render.Status(r, http.StatusAccepted)
+	}
 	return nil
 }
 
