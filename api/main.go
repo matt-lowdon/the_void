@@ -30,6 +30,7 @@ func EchoRoutes() chi.Router {
 
 	echoHandler := EchoHandler{}
 	eRouter.Get("/", echoHandler.ListEchoes)
+	eRouter.Post("/", echoHandler.CreateEcho)
 
 	return eRouter
 }
