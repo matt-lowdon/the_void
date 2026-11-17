@@ -14,13 +14,14 @@ type Echo struct{
 	Body string `json:"body"`
 }
 
+// This is the database for the time being
 var Echoes = []*Echo{
 	{Id: "1", Title: "Hello", Body: "This is the text"},
 	{Id: "2", Title: "Another echo", Body: "I am another echo"},
 }
 
 
-// The request payload for the Echo data model
+// The request payload struct for the Echo data model
 type EchoRequest struct{
 	*Echo
 
@@ -47,10 +48,11 @@ func (e *EchoResponse) Render(w http.ResponseWriter, r *http.Request) error {
 	return nil
 }
 
+// Consistent interface for returning 
 type SubmissionResponse struct{
 	Received bool `json:"received"`
 	Saved bool `json:"saved"`
-	ID string `json:"id,omitempty"`
+	Echo *Echo `json:"echo,omitempty"`
 }
 
 func (s *SubmissionResponse) Render(w http.ResponseWriter, r *http.Request) error {
