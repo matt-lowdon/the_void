@@ -17,8 +17,8 @@ type Echo struct{
 
 // This is the database for the time being
 var Echoes = []*Echo{
-	{Id: "1", Title: "Hello", Body: "This is the text"},
-	{Id: "2", Title: "Another echo", Body: "I am another echo"},
+	{Id: "1", Title: "Hello", Body: "This is the text", ReportCount: 0},
+	{Id: "2", Title: "Another echo", Body: "I am another echo", ReportCount: 0},
 }
 
 
