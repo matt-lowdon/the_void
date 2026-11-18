@@ -12,6 +12,7 @@ type Echo struct{
 	Id string `json:"id"`
 	Title string `json:"title"`
 	Body string `json:"body"`
+	ReportCount int `json:"report_count"`
 }
 
 // This is the database for the time being
