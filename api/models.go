@@ -8,17 +8,17 @@ import(
 )
 
 //An Echo is a post. This is the basic structure
+// TODO consider how reporting works. Not immediate
 type Echo struct{
 	Id string `json:"id"`
 	Title string `json:"title"`
 	Body string `json:"body"`
-	ReportCount int `json:"report_count"`
 }
 
 // This is the database for the time being
 var Echoes = []*Echo{
-	{Id: "1", Title: "Hello", Body: "This is the text", ReportCount: 0},
-	{Id: "2", Title: "Another echo", Body: "I am another echo", ReportCount: 0},
+	{Id: "1", Title: "Hello", Body: "This is the text"},
+	{Id: "2", Title: "Another echo", Body: "I am another echo"},
 }
 
 
